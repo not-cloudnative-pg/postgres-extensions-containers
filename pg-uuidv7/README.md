@@ -1,25 +1,23 @@
-# pg_cron
+# pg_uuidv7
 <!--
-SPDX-FileCopyrightText: Copyright © contributors to CloudNativePG, established as CloudNativePG a Series of LF Projects, LLC.
+SPDX-FileCopyrightText: Copyright © contributors to the Not-CloudNativePG project.
 SPDX-License-Identifier: Apache-2.0
 -->
 
-[pg_cron](https://github.com/citusdata/pg_cron) is an open-source extension
-that provides a simple cron-based job scheduler for PostgreSQL, allowing you
-to schedule PostgreSQL commands directly from the database.
+[pg_uuidv7](https://github.com/fboulnois/pg_uuidv7) is a PostgreSQL extension that provides functions for generating and working with UUID version 7 (UUIDv7) identifiers. UUIDv7 is a time-sortable UUID format that embeds a Unix timestamp, making it more suitable than UUID v4 for use as database primary keys.
 
 ## Usage
 
-### 1. Add the cron extension image to your Cluster
+### 1. Add the pg-uuidv7 extension image to your Cluster
 
-Define the `pg_cron` extension under the `postgresql.extensions` section of
+Define the `pg-uuidv7` extension under the `postgresql.extensions` section of
 your `Cluster` resource. For example:
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: cluster-pg-cron
+  name: cluster-pg-uuidv7
 spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:18-minimal-trixie
   instances: 1
@@ -28,44 +26,37 @@ spec:
     size: 1Gi
 
   postgresql:
-    parameters:
-      cron.database_name: app
-      cron.use_background_workers: "on"
-
-    shared_preload_libraries:
-    - "pg_cron"
-
     extensions:
-    - name: pg_cron
+    - name: pg-uuidv7
       image:
-        # renovate: suite=trixie-pgdg depName=postgresql-18-cron
-        reference: ghcr.io/cloudnative-pg/pg-cron:1.6.7-18-trixie
+        # renovate: suite=trixie-pgdg depName=postgresql-18-pg-uuidv7
+        reference: ghcr.io/not-cloudnative-pg/pg-uuidv7:1.7.0-18-trixie
 ```
 
 ### 2. Enable the extension in a database
 
-You can install `cron` in a specific database by creating or updating a
+You can install `pg_uuidv7` in a specific database by creating or updating a
 `Database` resource, or by running `CREATE EXTENSION` directly in `psql`. For example, to enable it in the `app` database:
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
-  name: cluster-pg-cron-app
+  name: cluster-pg-uuidv7-app
 spec:
   name: app
   owner: app
   cluster:
-    name: cluster-pg-cron
+    name: cluster-pg-uuidv7
   extensions:
-  - name: pg_cron
-    # renovate: suite=trixie-pgdg depName=postgresql-18-cron extractVersion=^(?<version>\d+\.\d+)
-    version: '1.6'
+  - name: pg-uuidv7
+    # renovate: suite=trixie-pgdg depName=postgresql-18-pg-uuidv7 extractVersion=^(?<version>\d+\.\d+\.\d+)
+    version: '1.7'
 ```
 Alternatively, you can enable the extension directly with SQL:
 
 ```sql
-CREATE EXTENSION pg_cron;
+CREATE EXTENSION pg_uuidv7;
 ```
 
 ### 3. Verify installation
@@ -76,7 +67,17 @@ Once the database is ready, connect to it with `psql` and run:
 \dx
 ```
 
-You should see `pg_cron` listed among the installed extensions.
+You should see `pg_uuidv7` listed among the installed extensions. You can then
+generate a UUIDv7 with:
+
+```sql
+SELECT uuid_generate_v7();
+```
+
+## Known Caveats
+
+- **License**: `pg_uuidv7` is licensed under MPL-2.0 (Mozilla Public License),
+  which is why it is hosted in the not-cloudnative-pg fork rather than upstream.
 
 ## Contributors
 
@@ -98,7 +99,7 @@ The maintainers are responsible for:
 This container image contains software that may be licensed under various
 open-source licenses.
 
-All relevant license and copyright information for the `pg_cron` extension
+All relevant license and copyright information for the `pg-uuidv7` extension
 and its dependencies are bundled within the image at:
 
 ```text
