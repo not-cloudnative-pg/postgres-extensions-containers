@@ -32,7 +32,7 @@ project due to licensing constraints, but are otherwise fully compatible with
 | Extension | Description | Project URL | Maintained by | License blocker |
 | :--- | :--- | :--- | :--- | :--- |
 | **[age](age)** | Apache AGE graph database extension (Cypher queries) | [github.com/apache/age](https://github.com/apache/age) | @ardentperf | libcsv (LGPL-2.1+) |
-| **[debversion](debversion)** | Debian package version comparison type | [packages.debian.org/postgresql-18-debversion](https://packages.debian.org/search?keywords=postgresql-debversion) | @ardentperf | GPL-3+ |
+| **[debversion](debversion)** | Debian package version comparison type | [salsa.debian.org/postgresql/postgresql-debversion](https://salsa.debian.org/postgresql/postgresql-debversion) | @ardentperf | GPL-3+ |
 | **[h3](h3)** | Uber H3 hexagonal geospatial indexing | [github.com/zachasme/h3-pg](https://github.com/zachasme/h3-pg) | @ardentperf | libh3-1 (Apache-2.0 + AGPL-3+ test deps) |
 | **[mobilitydb](mobilitydb)** | Spatio-temporal moving objects database | [mobilitydb.com](https://mobilitydb.com/) | @ardentperf | GPL-2+, GPL-3+ |
 | **[mysql-fdw](mysql-fdw)** | MySQL/MariaDB foreign data wrapper | [github.com/EnterpriseDB/mysql_fdw](https://github.com/EnterpriseDB/mysql_fdw) | @ardentperf | libmariadb3 (LGPL-2.1) |
@@ -41,13 +41,13 @@ project due to licensing constraints, but are otherwise fully compatible with
 | **[pg-uuidv7](pg-uuidv7)** | UUID version 7 (time-sortable) generator | [github.com/fboulnois/pg_uuidv7](https://github.com/fboulnois/pg_uuidv7) | @ardentperf | MPL-2.0 |
 | **[pgagent](pgagent)** | PostgreSQL job scheduler (pgAdmin component) | [pgadmin.org](https://www.pgadmin.org/docs/pgadmin4/latest/pgagent.html) | @ardentperf | Boost libraries (BSL-1.0) |
 | **[pgmemcache](pgmemcache)** | Memcached client interface for PostgreSQL | [github.com/ohmu/pgmemcache](https://github.com/ohmu/pgmemcache) | @ardentperf | libmemcached11 (LGPL) |
-| **[pgmp](pgmp)** | GMP arbitrary-precision arithmetic types | [pgmp.readthedocs.io](https://pgmp.readthedocs.io/) | @ardentperf | LGPL-3+ |
+| **[pgmp](pgmp)** | GMP arbitrary-precision arithmetic types | [github.com/dvarrazzo/pgmp](https://github.com/dvarrazzo/pgmp) | @ardentperf | LGPL-3+ |
 | **[pgsphere](pgsphere)** | Spherical geometry for astronomical data | [pgsphere.github.io](https://pgsphere.github.io/) | @ardentperf | GPL-3+ |
 | **[pldebugger](pldebugger)** | PL/pgSQL interactive debugger (pldbgapi) | [github.com/EnterpriseDB/pldebugger](https://github.com/EnterpriseDB/pldebugger) | @ardentperf | Artistic-2.0 |
 | **[plprofiler](plprofiler)** | PL/pgSQL execution profiler | [github.com/bigsql/plprofiler](https://github.com/bigsql/plprofiler) | @ardentperf | Artistic-2.0 |
 | **[plr](plr)** | R procedural language for PostgreSQL | [joeconway.com/plr](https://www.joeconway.com/plr/) | @ardentperf | GPL-2+ |
 | **[q3c](q3c)** | Quad Tree Cube sky survey spatial indexing | [github.com/segasai/q3c](https://github.com/segasai/q3c) | @ardentperf | GPL-2+ |
-| **[snakeoil](snakeoil)** | ClamAV antivirus scanning for PostgreSQL | [github.com/s-ber/pg_snakeoil](https://github.com/s-ber/pg_snakeoil) | @ardentperf | libclamav12 (LGPL-2+) |
+| **[snakeoil](snakeoil)** | ClamAV antivirus scanning for PostgreSQL | [github.com/credativ/pg_snakeoil](https://github.com/credativ/pg_snakeoil) | @ardentperf | libclamav12 (LGPL-2+) |
 | **[tds-fdw](tds-fdw)** | Microsoft SQL Server / Sybase foreign data wrapper | [github.com/tds-fdw/tds_fdw](https://github.com/tds-fdw/tds_fdw) | @ardentperf | libsybdb5/FreeTDS (LGPL-2+) |
 
 Extensions in this repository are not accepted upstream solely due to licensing
