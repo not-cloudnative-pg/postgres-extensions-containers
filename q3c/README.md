@@ -1,25 +1,23 @@
-# pg_cron
+# q3c
 <!--
-SPDX-FileCopyrightText: Copyright © contributors to CloudNativePG, established as CloudNativePG a Series of LF Projects, LLC.
+SPDX-FileCopyrightText: Copyright © contributors to the Not-CloudNativePG project.
 SPDX-License-Identifier: Apache-2.0
 -->
 
-[pg_cron](https://github.com/citusdata/pg_cron) is an open-source extension
-that provides a simple cron-based job scheduler for PostgreSQL, allowing you
-to schedule PostgreSQL commands directly from the database.
+[q3c](https://github.com/segasai/q3c) (Quad Tree Cube) is a PostgreSQL extension for indexing and querying sky survey data using spherical coordinate systems. It provides efficient spatial indexing of astronomical objects (stars, galaxies) by right ascension and declination, enabling fast cone searches and neighbor lookups.
 
 ## Usage
 
-### 1. Add the cron extension image to your Cluster
+### 1. Add the q3c extension image to your Cluster
 
-Define the `pg_cron` extension under the `postgresql.extensions` section of
+Define the `q3c` extension under the `postgresql.extensions` section of
 your `Cluster` resource. For example:
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: cluster-pg-cron
+  name: cluster-q3c
 spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:18-minimal-trixie
   instances: 1
@@ -28,44 +26,37 @@ spec:
     size: 1Gi
 
   postgresql:
-    parameters:
-      cron.database_name: app
-      cron.use_background_workers: "on"
-
-    shared_preload_libraries:
-    - "pg_cron"
-
     extensions:
-    - name: pg_cron
+    - name: q3c
       image:
-        # renovate: suite=trixie-pgdg depName=postgresql-18-cron
-        reference: ghcr.io/cloudnative-pg/pg-cron:1.6.7-18-trixie
+        # renovate: suite=trixie-pgdg depName=postgresql-18-q3c
+        reference: ghcr.io/not-cloudnative-pg/q3c:2.0.2-18-trixie
 ```
 
 ### 2. Enable the extension in a database
 
-You can install `cron` in a specific database by creating or updating a
+You can install `q3c` in a specific database by creating or updating a
 `Database` resource, or by running `CREATE EXTENSION` directly in `psql`. For example, to enable it in the `app` database:
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
-  name: cluster-pg-cron-app
+  name: cluster-q3c-app
 spec:
   name: app
   owner: app
   cluster:
-    name: cluster-pg-cron
+    name: cluster-q3c
   extensions:
-  - name: pg_cron
-    # renovate: suite=trixie-pgdg depName=postgresql-18-cron extractVersion=^(?<version>\d+\.\d+)
-    version: '1.6'
+  - name: q3c
+    # renovate: suite=trixie-pgdg depName=postgresql-18-q3c extractVersion=^(?<version>\d+\.\d+\.\d+)
+    version: '2.0.2'
 ```
 Alternatively, you can enable the extension directly with SQL:
 
 ```sql
-CREATE EXTENSION pg_cron;
+CREATE EXTENSION q3c;
 ```
 
 ### 3. Verify installation
@@ -76,7 +67,12 @@ Once the database is ready, connect to it with `psql` and run:
 \dx
 ```
 
-You should see `pg_cron` listed among the installed extensions.
+You should see `q3c` listed among the installed extensions.
+
+## Known Caveats
+
+- **License**: `q3c` is GPL-2+, which is why it is hosted in the
+  not-cloudnative-pg fork rather than upstream.
 
 ## Contributors
 
@@ -98,7 +94,7 @@ The maintainers are responsible for:
 This container image contains software that may be licensed under various
 open-source licenses.
 
-All relevant license and copyright information for the `pg_cron` extension
+All relevant license and copyright information for the `q3c` extension
 and its dependencies are bundled within the image at:
 
 ```text

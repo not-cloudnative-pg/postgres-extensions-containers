@@ -1,25 +1,23 @@
-# pg_cron
+# plprofiler
 <!--
-SPDX-FileCopyrightText: Copyright © contributors to CloudNativePG, established as CloudNativePG a Series of LF Projects, LLC.
+SPDX-FileCopyrightText: Copyright © contributors to the Not-CloudNativePG project.
 SPDX-License-Identifier: Apache-2.0
 -->
 
-[pg_cron](https://github.com/citusdata/pg_cron) is an open-source extension
-that provides a simple cron-based job scheduler for PostgreSQL, allowing you
-to schedule PostgreSQL commands directly from the database.
+[plprofiler](https://github.com/bigsql/plprofiler) is a PostgreSQL extension that provides execution profiling for PL/pgSQL functions and procedures. It collects per-statement call counts, total execution time, and self-time, helping you identify performance bottlenecks in stored procedure code.
 
 ## Usage
 
-### 1. Add the cron extension image to your Cluster
+### 1. Add the plprofiler extension image to your Cluster
 
-Define the `pg_cron` extension under the `postgresql.extensions` section of
+Define the `plprofiler` extension under the `postgresql.extensions` section of
 your `Cluster` resource. For example:
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: cluster-pg-cron
+  name: cluster-plprofiler
 spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:18-minimal-trixie
   instances: 1
@@ -28,44 +26,37 @@ spec:
     size: 1Gi
 
   postgresql:
-    parameters:
-      cron.database_name: app
-      cron.use_background_workers: "on"
-
-    shared_preload_libraries:
-    - "pg_cron"
-
     extensions:
-    - name: pg_cron
+    - name: plprofiler
       image:
-        # renovate: suite=trixie-pgdg depName=postgresql-18-cron
-        reference: ghcr.io/cloudnative-pg/pg-cron:1.6.7-18-trixie
+        # renovate: suite=trixie-pgdg depName=postgresql-18-plprofiler
+        reference: ghcr.io/not-cloudnative-pg/plprofiler:4.2.5-18-trixie
 ```
 
 ### 2. Enable the extension in a database
 
-You can install `cron` in a specific database by creating or updating a
+You can install `plprofiler` in a specific database by creating or updating a
 `Database` resource, or by running `CREATE EXTENSION` directly in `psql`. For example, to enable it in the `app` database:
 
 ```yaml
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
-  name: cluster-pg-cron-app
+  name: cluster-plprofiler-app
 spec:
   name: app
   owner: app
   cluster:
-    name: cluster-pg-cron
+    name: cluster-plprofiler
   extensions:
-  - name: pg_cron
-    # renovate: suite=trixie-pgdg depName=postgresql-18-cron extractVersion=^(?<version>\d+\.\d+)
-    version: '1.6'
+  - name: plprofiler
+    # renovate: suite=trixie-pgdg depName=postgresql-18-plprofiler extractVersion=^(?<version>\d+\.\d+)
+    version: '4.2'
 ```
 Alternatively, you can enable the extension directly with SQL:
 
 ```sql
-CREATE EXTENSION pg_cron;
+CREATE EXTENSION plprofiler;
 ```
 
 ### 3. Verify installation
@@ -76,7 +67,12 @@ Once the database is ready, connect to it with `psql` and run:
 \dx
 ```
 
-You should see `pg_cron` listed among the installed extensions.
+You should see `plprofiler` listed among the installed extensions.
+
+## Known Caveats
+
+- **License**: `plprofiler` is Artistic-2.0, which is why it is hosted in the
+  not-cloudnative-pg fork rather than upstream.
 
 ## Contributors
 
@@ -98,7 +94,7 @@ The maintainers are responsible for:
 This container image contains software that may be licensed under various
 open-source licenses.
 
-All relevant license and copyright information for the `pg_cron` extension
+All relevant license and copyright information for the `plprofiler` extension
 and its dependencies are bundled within the image at:
 
 ```text

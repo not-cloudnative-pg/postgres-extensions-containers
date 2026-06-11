@@ -7,3 +7,56 @@
 # pg_cron
 /pg-cron/ @ardentperf
 
+# postgis (stub for required_extensions dependency resolution)
+/postgis/ @ardentperf
+
+# pldebugger
+/pldebugger/ @ardentperf
+
+# plprofiler
+/plprofiler/ @ardentperf
+
+# pg-uuidv7
+/pg-uuidv7/ @ardentperf
+
+# pgagent
+/pgagent/ @ardentperf
+
+# pgmemcache
+/pgmemcache/ @ardentperf
+
+# age
+/age/ @ardentperf
+
+# pgmp
+/pgmp/ @ardentperf
+
+# tds-fdw
+/tds-fdw/ @ardentperf
+
+# pg-rrule
+/pg-rrule/ @ardentperf
+
+# mysql-fdw
+/mysql-fdw/ @ardentperf
+
+# snakeoil
+/snakeoil/ @ardentperf
+
+# h3
+/h3/ @ardentperf
+
+# q3c
+/q3c/ @ardentperf
+
+# plr
+/plr/ @ardentperf
+
+# pgsphere
+/pgsphere/ @ardentperf
+
+# debversion
+/debversion/ @ardentperf
+
+# mobilitydb
+/mobilitydb/ @ardentperf
