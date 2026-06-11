@@ -1,4 +1,4 @@
-[![CloudNativePG](./logo/cloudnativepg.png)](https://cloudnative-pg.io/)
+[![Not-CNPG](./logo/not-cnpg.png)](https://github.com/not-cloudnative-pg/)
 
 # CNPG PostgreSQL Extensions Container Images
 
