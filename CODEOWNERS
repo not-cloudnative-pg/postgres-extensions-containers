@@ -2,13 +2,8 @@
 # responsible for code in a repository. For details, please refer to
 # https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/about-code-owners
 
-* @cloudnative-pg/maintainers @NiccoloFei
-
-# TimescaleDB (OSS version)
-/timescaledb-oss/ @shusaan @cloudnative-pg/maintainers @NiccoloFei
-
-# wal2json
-/wal2json/ @cloudnative-pg/maintainers @NiccoloFei @solidDoWant
+* @ardentperf
 
 # pg_cron
 /pg-cron/ @ardentperf
+
